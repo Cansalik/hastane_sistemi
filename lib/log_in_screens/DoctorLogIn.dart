@@ -23,12 +23,11 @@ class _DoctorLogInState extends State<DoctorLogIn> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-            colors: [Colors.brown.shade100,Colors.green.shade300,Colors.green],
+            colors: [Colors.blue.shade100,Colors.blue.shade300,Colors.blue],
               begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+            padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height * 0.2, 20, 0),
             child: Column(
               children: <Widget>[
                 logoWidget("assets/images/heart.png"),

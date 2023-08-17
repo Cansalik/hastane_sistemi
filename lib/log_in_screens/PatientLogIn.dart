@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hastane_sistemi/patient_screens/patientMain.dart';
 import '../reusable_widgets/reusable_widget.dart';
 
 class PatientLogIn extends StatefulWidget {
@@ -52,7 +53,7 @@ class _PatientLogInState extends State<PatientLogIn> {
                       onPressed: () {
                         if(_userNameTextController.text == "Hasta" && _passwordTextController.text == "123456")
                         {
-                          print("Hasta Giriş Başarılı");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => patientMain()));
                           _userNameTextController.text = "";
                           _passwordTextController.text = "";
                         }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hastane_sistemi/doctor_screens/doctorSettings.dart';
+import 'package:hastane_sistemi/doctor_screens/patientDetail.dart';
 import 'package:hastane_sistemi/doctor_screens/patientList.dart';
 import 'package:hastane_sistemi/log_in_screens/Begin.dart';
+import 'package:hastane_sistemi/patient_screens/patientAppointment.dart';
+import 'package:hastane_sistemi/patient_screens/patientMain.dart';
 
 
 void main() {
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  patientList(),
+      home:  patientAppointment(),
     );
   }
 }
