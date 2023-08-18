@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="hastane_sistemi"
+        android:label="SEEN Hastaneleri"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

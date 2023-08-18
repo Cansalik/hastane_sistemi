@@ -82,13 +82,19 @@ class _doctorSettingsState extends State<doctorSettings> {
                     ],
                   ),
                 ),
-
                 SizedBox(
                   width: 350,
                   height: 75,
                   child: ElevatedButton(
                     onPressed: ()
                     {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Bilgiler Güncellendi", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                          backgroundColor: Colors.white,
+                          duration: Duration(seconds: 1),
+                        ),
+                      );
                     },
                     child: Text("Güncelle",style: TextStyle(color: Colors.white),),
                     style: ElevatedButton.styleFrom(

@@ -1,44 +1,38 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
 
-class patientAppointment extends StatefulWidget {
-  const patientAppointment({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:hastane_sistemi/reusable_widgets/reusable_widget.dart';
+
+class doctorDeleteAndUpdate extends StatefulWidget {
+  const doctorDeleteAndUpdate({Key? key}) : super(key: key);
 
   @override
-  State<patientAppointment> createState() => _patientAppointmentState();
+  State<doctorDeleteAndUpdate> createState() => _doctorDeleteAndUpdateState();
 }
 
-class _patientAppointmentState extends State<patientAppointment> {
+class _doctorDeleteAndUpdateState extends State<doctorDeleteAndUpdate> {
 
-  String selectedDoctorBranch = "Dahiliye"; // Başlangıçta seçilen branş
+
+  String selectedDoctorBranch = "Doktor Branşı"; // Başlangıçta seçilen branş
   final List<String> doctorBranches = [
+    "Doktor Branşı",
     "Dahiliye",
     "Cerrahi",
     "Kardiyoloji",
     "Nöroloji",
     "Ortopedi"
-  ]; // Doktor branşları
+  ];
 
-  String _selectedDoctor = "Neşet Can SALIK"; // Başlangıçta seçilen branş
+  String _selectedDoctor = "-------------"; // Başlangıçta seçilen branş
   final List<String> _doctor = [
-    "Neşet Can SALIK",
+    "-------------",
     "Mehmet Cansever",
     "Ömer Yurdakul",
     "Musa Atsal",
     "Hasan Çakmak"
   ];
 
-  String _selectedTime = "08.00"; // Başlangıçta seçilen branş
-  final List<String> _time = [
-    "08.00",
-    "08.30",
-    "09.00",
-    "09.30",
-    "10.00",
-    "10.30",
-  ];
-
-  TextEditingController _controller = TextEditingController();
-
+  TextEditingController _doktorTcTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,15 +42,16 @@ class _patientAppointmentState extends State<patientAppointment> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.yellow.shade100,Colors.yellow.shade300,Colors.yellow],
+                colors: [Colors.pinkAccent.shade100,Colors.blue.shade300,Colors.blue.shade400],
                 begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height * 0.1, 20, 0),
+            padding: EdgeInsets.fromLTRB(
+                20, MediaQuery.of(context).size.height * 0.1, 20, 0),
             child: Column(
               children: <Widget>[
-                Image.asset("assets/images/doctorAppointment.png",color: Colors.black,width: 240,height: 240,),
-                const SizedBox(height: 10,),
+                logoWidget("assets/images/doctorsetting.png"),
+                const SizedBox(height: 30,),
                 SizedBox(
                   width: 350,
                   height: 75,
@@ -131,69 +126,30 @@ class _patientAppointmentState extends State<patientAppointment> {
                   ),
                 ),
                 const SizedBox(height: 30,),
-                SizedBox(
-                  width: 350,
-                  height: 75,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: _selectedTime,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedTime = newValue!;
-                          });
-                        },
-                        items: _time.map<DropdownMenuItem<String>>((String time) {
-                          return DropdownMenuItem<String>(
-                            value: time,
-                            child: Row(
-                              children: [
-                                Icon(Icons.local_hospital),
-                                SizedBox(width: 10),
-                                Text(
-                                  time,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
+                reusableTextFieldBlackDoctorDeleteAndUpdate("12345678910",Icons.numbers, true, _doktorTcTextController),
+                const SizedBox(height: 30,),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: SizedBox(
+                    width: 350,
+                    height: 55,
+                    child: ElevatedButton(
+                      onPressed: () {
+
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Doktor Silindi", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                            backgroundColor: Colors.pinkAccent.shade100,
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      },
+                      child: Text("Doktor'u Sil", style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30,),
-                TextFormField(
-                  controller: _controller,
-                  decoration: InputDecoration(
-                    labelText: 'Şikayetinizi Yazın',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 30,),
-                SizedBox(
-                  width: 350,
-                  height: 75,
-                  child: ElevatedButton(
-                    onPressed: ()
-                    {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Randevu Oluşturuldu", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                          backgroundColor: Colors.white,
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
-                    },
-                    child: Text("Randevu Oluştur",style: TextStyle(color: Colors.black),),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.transparent,
-                      elevation: 0.01,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black26,
+                      ),
                     ),
                   ),
                 ),
@@ -205,3 +161,14 @@ class _patientAppointmentState extends State<patientAppointment> {
     );
   }
 }
+
+
+/*const SizedBox(height: 30,),
+                reusableTextFieldBlack("Doktor Adı",Icons.person_outline, false, _doctorNameTextController),
+                const SizedBox(height: 20,),
+                reusableTextFieldBlack("Doktor Soyadı", Icons.person_outline, true, _doctorSurNameTextController),
+                const SizedBox(height: 20,),
+                reusableTextFieldBlack("Doktor T.C.", Icons.numbers, true, _doctorTCTextController),
+                const SizedBox(height: 20,),
+                reusableTextFieldBlack("Doktor Şifre", Icons.lock_outline, true, _doctorPasswordTextController),
+                const SizedBox(height: 20,),*/

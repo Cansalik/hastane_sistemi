@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hastane_sistemi/reusable_widgets/reusable_widget.dart';
+import 'package:hastane_sistemi/secretary_screens/secretaryPswdReset.dart';
+import 'package:hastane_sistemi/secretary_screens/secretaryScreen.dart';
 
 class SecretaryLogIn extends StatefulWidget {
   const SecretaryLogIn({Key? key}) : super(key: key);
@@ -52,7 +54,7 @@ class _SecretaryLogInState extends State<SecretaryLogIn> {
                       onPressed: () {
                         if(_userNameTextController.text == "Sekreter" && _passwordTextController.text == "123456")
                         {
-                          print("Sekreter Giriş Başarılı");
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => secretaryScreen()));
                           _userNameTextController.text = "";
                           _passwordTextController.text = "";
                         }
@@ -80,13 +82,7 @@ class _SecretaryLogInState extends State<SecretaryLogIn> {
                 TextButton(
                   onPressed: ()
                   {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Sekreter İle Görüşün", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        backgroundColor: Colors.black,
-                        duration: Duration(seconds: 1),
-                      ),
-                    );
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => secretaryPswdReset()));
                   },
                   child: Text("Şifremi Unuttum ?",style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),),

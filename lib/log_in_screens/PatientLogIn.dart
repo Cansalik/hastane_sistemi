@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hastane_sistemi/patient_screens/patientMain.dart';
+import 'package:hastane_sistemi/patient_screens/patientPswdReset.dart';
+import 'package:hastane_sistemi/patient_screens/patientRegister.dart';
 import '../reusable_widgets/reusable_widget.dart';
 
 class PatientLogIn extends StatefulWidget {
@@ -31,19 +33,11 @@ class _PatientLogInState extends State<PatientLogIn> {
             child: Column(
               children: <Widget>[
                 logoWidget("assets/images/heartbeat.png"),
-                const SizedBox(
-                  height: 30,
-                ),
-                reusableTextFieldBlack("Kullanıcı Adı",Icons.person_outline, false,
-                    _userNameTextController),
-                const SizedBox(
-                  height: 20,
-                ),
-                reusableTextFieldBlack("Şifre", Icons.lock_outline, true,
-                    _passwordTextController),
-                const SizedBox(
-                  height: 5,
-                ),
+                const SizedBox(height: 30,),
+                reusableTextFieldBlack("Kullanıcı Adı",Icons.person_outline, false, _userNameTextController),
+                const SizedBox(height: 20,),
+                reusableTextFieldBlack("Şifre", Icons.lock_outline, true, _passwordTextController),
+                const SizedBox(height: 5,),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: SizedBox(
@@ -78,19 +72,28 @@ class _PatientLogInState extends State<PatientLogIn> {
                     ),
                   ),
                 ),
-                TextButton(
-                  onPressed: ()
-                  {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Sekreter İle Görüşün", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                        backgroundColor: Colors.black,
-                        duration: Duration(seconds: 1),
+                Column(
+                  children: [
+                    TextButton(
+                      onPressed: ()
+                      {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => patientPswdReset()));
+                      },
+                      child: Text("Şifremi Unuttum ?",style: TextStyle(
+                          color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 16),),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 45.0),
+                      child: TextButton(
+                        onPressed: ()
+                        {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => patientRegister()));
+                        },
+                        child: Text("Kayıt Ol",style: TextStyle(
+                            color: Colors.black54, fontWeight: FontWeight.bold, fontSize: 20),),
                       ),
-                    );
-                  },
-                  child: Text("Şifremi Unuttum ?",style: TextStyle(
-                      color: Colors.black38, fontWeight: FontWeight.bold, fontSize: 16),),
+                    ),
+                  ],
                 ),
               ],
             ),

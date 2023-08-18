@@ -1,33 +1,25 @@
 import 'package:flutter/material.dart';
 
-class patientAppointment extends StatefulWidget {
-  const patientAppointment({Key? key}) : super(key: key);
+class createDoctorAppointment extends StatefulWidget {
+  const createDoctorAppointment({Key? key}) : super(key: key);
 
   @override
-  State<patientAppointment> createState() => _patientAppointmentState();
+  State<createDoctorAppointment> createState() => _createDoctorAppointmentState();
 }
 
-class _patientAppointmentState extends State<patientAppointment> {
+class _createDoctorAppointmentState extends State<createDoctorAppointment> {
 
-  String selectedDoctorBranch = "Dahiliye"; // Başlangıçta seçilen branş
-  final List<String> doctorBranches = [
-    "Dahiliye",
-    "Cerrahi",
-    "Kardiyoloji",
-    "Nöroloji",
-    "Ortopedi"
+
+  String appointmentDate = "Açılacak Randevunun Tarihi"; // Başlangıçta seçilen branş
+  final List<String> _appointmentDate = [
+    "Açılacak Randevunun Tarihi",
+    "11.10.2022",
+    "23.11.2022",
+    "16.01.2022",
+    "24.12.2022"
   ]; // Doktor branşları
 
-  String _selectedDoctor = "Neşet Can SALIK"; // Başlangıçta seçilen branş
-  final List<String> _doctor = [
-    "Neşet Can SALIK",
-    "Mehmet Cansever",
-    "Ömer Yurdakul",
-    "Musa Atsal",
-    "Hasan Çakmak"
-  ];
-
-  String _selectedTime = "08.00"; // Başlangıçta seçilen branş
+  String appointmentTime = "08.00"; // Başlangıçta seçilen branş
   final List<String> _time = [
     "08.00",
     "08.30",
@@ -37,8 +29,27 @@ class _patientAppointmentState extends State<patientAppointment> {
     "10.30",
   ];
 
-  TextEditingController _controller = TextEditingController();
+  String appointmentBranch = "Randevu Açılacak Poliklinik"; // Başlangıçta seçilen branş
+  final List<String> _branch = [
+    "Randevu Açılacak Poliklinik",
+    "Genel Cerrahi",
+    "Dahiliye",
+    "Kadın Hastalıkları ve Doğum",
+    "Çocuk Sağlığı ve Hastalıkları",
+    "Ortopedi",
+  ];
 
+  String _selectedDoctor = "Randevu Açılacak Doktor"; // Başlangıçta seçilen branş
+  final List<String> _doctor = [
+    "Randevu Açılacak Doktor",
+    "Neşet Can SALIK",
+    "Mehmet Cansever",
+    "Ömer Yurdakul",
+    "Musa Atsal",
+    "Hasan Çakmak"
+  ];
+
+  TextEditingController _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +59,16 @@ class _patientAppointmentState extends State<patientAppointment> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.yellow.shade100,Colors.yellow.shade300,Colors.yellow],
+                colors: [Colors.pinkAccent.shade100,Colors.blue.shade300,Colors.blue],
                 begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(20, MediaQuery.of(context).size.height * 0.1, 20, 0),
             child: Column(
               children: <Widget>[
-                Image.asset("assets/images/doctorAppointment.png",color: Colors.black,width: 240,height: 240,),
+                Image.asset("assets/images/nurse.png",color: Colors.black,width: 200,height: 200,),
+                const SizedBox(height: 10,),
+                Text("Hoşgeldin, Merve SALIK",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
                 const SizedBox(height: 10,),
                 SizedBox(
                   width: 350,
@@ -68,21 +81,95 @@ class _patientAppointmentState extends State<patientAppointment> {
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        value: selectedDoctorBranch,
+                        value: appointmentDate,
                         onChanged: (String? newValue) {
                           setState(() {
-                            selectedDoctorBranch = newValue!;
+                            appointmentDate = newValue!;
                           });
                         },
-                        items: doctorBranches.map<DropdownMenuItem<String>>((String branch) {
+                        items: _appointmentDate.map<DropdownMenuItem<String>>((String branch) {
                           return DropdownMenuItem<String>(
                             value: branch,
+                            child: Row(
+                              children: [
+                                Icon(Icons.date_range),
+                                SizedBox(width: 10),
+                                Text(
+                                  branch,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30,),
+                SizedBox(
+                  width: 350,
+                  height: 75,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: appointmentTime,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            appointmentTime = newValue!;
+                          });
+                        },
+                        items: _time.map<DropdownMenuItem<String>>((String doctor) {
+                          return DropdownMenuItem<String>(
+                            value: doctor,
+                            child: Row(
+                              children: [
+                                Icon(Icons.access_time_outlined),
+                                SizedBox(width: 10),
+                                Text(
+                                  doctor,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 30,),
+                SizedBox(
+                  width: 350,
+                  height: 75,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: appointmentBranch,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            appointmentBranch = newValue!;
+                          });
+                        },
+                        items: _branch.map<DropdownMenuItem<String>>((String time) {
+                          return DropdownMenuItem<String>(
+                            value: time,
                             child: Row(
                               children: [
                                 Icon(Icons.local_hospital),
                                 SizedBox(width: 10),
                                 Text(
-                                  branch,
+                                  time,
                                   style: TextStyle(fontSize: 16),
                                 ),
                               ],
@@ -111,49 +198,12 @@ class _patientAppointmentState extends State<patientAppointment> {
                             _selectedDoctor = newValue!;
                           });
                         },
-                        items: _doctor.map<DropdownMenuItem<String>>((String doctor) {
-                          return DropdownMenuItem<String>(
-                            value: doctor,
-                            child: Row(
-                              children: [
-                                Icon(Icons.local_hospital),
-                                SizedBox(width: 10),
-                                Text(
-                                  doctor,
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 30,),
-                SizedBox(
-                  width: 350,
-                  height: 75,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: _selectedTime,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedTime = newValue!;
-                          });
-                        },
-                        items: _time.map<DropdownMenuItem<String>>((String time) {
+                        items: _doctor.map<DropdownMenuItem<String>>((String time) {
                           return DropdownMenuItem<String>(
                             value: time,
                             child: Row(
                               children: [
-                                Icon(Icons.local_hospital),
+                                Icon(Icons.person_outline),
                                 SizedBox(width: 10),
                                 Text(
                                   time,
@@ -168,29 +218,23 @@ class _patientAppointmentState extends State<patientAppointment> {
                   ),
                 ),
                 const SizedBox(height: 30,),
-                TextFormField(
-                  controller: _controller,
-                  decoration: InputDecoration(
-                    labelText: 'Şikayetinizi Yazın',
-                    border: OutlineInputBorder(),
-                  ),
-                ),
-                const SizedBox(height: 30,),
                 SizedBox(
                   width: 350,
                   height: 75,
                   child: ElevatedButton(
                     onPressed: ()
                     {
+
+
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("Randevu Oluşturuldu", style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                          backgroundColor: Colors.white,
+                          content: Text("Randevu Alanı Açıldı.", style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                          backgroundColor: Colors.black,
                           duration: Duration(seconds: 1),
                         ),
                       );
                     },
-                    child: Text("Randevu Oluştur",style: TextStyle(color: Colors.black),),
+                    child: Text("Randevu Alanı Aç",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       elevation: 0.01,

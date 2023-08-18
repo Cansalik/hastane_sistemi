@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:hastane_sistemi/patient_screens/Appointment.dart';
-import 'package:hastane_sistemi/patient_screens/patientAppointment.dart';
+import 'package:hastane_sistemi/secretary_screens/addDoctor.dart';
+import 'package:hastane_sistemi/secretary_screens/doctorDeleteAndUpdate.dart';
 
-class patientMain extends StatefulWidget {
-  const patientMain({Key? key}) : super(key: key);
+class doctorSetPanel extends StatefulWidget {
+  const doctorSetPanel({Key? key}) : super(key: key);
 
   @override
-  State<patientMain> createState() => _patientMainState();
+  State<doctorSetPanel> createState() => _doctorSetPanelState();
 }
 
-class _patientMainState extends State<patientMain> {
+class _doctorSetPanelState extends State<doctorSetPanel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,18 +18,15 @@ class _patientMainState extends State<patientMain> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: [Colors.yellow.shade100,Colors.yellow.shade300,Colors.yellow],
+                colors: [Colors.pinkAccent.shade100,Colors.blue.shade300,Colors.blue],
                 begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                20, MediaQuery.of(context).size.height * 0.1, 20, 0),
             child: Column(
               children: <Widget>[
-                Image.asset("assets/images/heart.png",color: Colors.white,width: 240,height: 240,),
-                Text('Hasta Adı', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                const SizedBox(height: 30,),
-                Text('Hasta T.C.', style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                Image.asset("assets/images/doctorsetting.png",color: Colors.black,width: 240,height: 240,),
                 const SizedBox(height: 30,),
                 SizedBox(
                   width: 350,
@@ -37,9 +34,9 @@ class _patientMainState extends State<patientMain> {
                   child: ElevatedButton(
                     onPressed: ()
                     {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> patientAppointment()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>addDoctor()));
                     },
-                    child: Text("Randevu Oluşturmak İçin Tıklayın",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                    child: Text("Doktor Ekle",style: TextStyle(color: Colors.white),),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       elevation: 0.01,
@@ -53,9 +50,9 @@ class _patientMainState extends State<patientMain> {
                   child: ElevatedButton(
                     onPressed: ()
                     {
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=> appointment()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> doctorDeleteAndUpdate()));
                     },
-                    child: Text("Aktif Randevularınız İçin Tıklayın",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                    child: Text("Doktor Güncelle - Sil",style: TextStyle(color: Colors.white),),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
                       elevation: 0.01,
