@@ -13,9 +13,8 @@ class _appointmentState extends State<appointment> {
 
   Future<List<Active_appointment>> appointmentList() async {
     final List<Active_appointment> appointment = [
-      Active_appointment("Branch A", "Dr. Deniz", "10:00 AM","02.09.2022"),
-      Active_appointment("Branch B", "Dr. Johnson", "2:30 PM","05.06.2023"),
-      Active_appointment("Branch s", "Dr. Alex", "5:30 PM","23.11.2023"),
+      //Active_appointment(Appointment_ID, Appointment_Date, Appointment_Time, Appointment_Branch, Appointment_Doctor, Appointment_State, Appointment_TC, Appointment_Complaint, Patient)
+
     ];
     return appointment;
   }
@@ -80,15 +79,15 @@ class _appointmentState extends State<appointment> {
                               child: Image.asset("assets/images/doctorAppointment.png"),
                             ),
                             Text(
-                              "Doktor: ${appoinment.doctor}",
+                              "Doktor: ",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "Tarih: ${appoinment.date}",
+                              "Tarih: ",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "Saat: ${appoinment.time}",
+                              "Saat: ",
                               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                             ),
                             SizedBox(

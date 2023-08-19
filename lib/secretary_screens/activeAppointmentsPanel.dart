@@ -12,7 +12,7 @@ class _activeAppointmentsPanelState extends State<activeAppointmentsPanel> {
 
   Future<List<Active_appointment>> appointmentList() async {
     final List<Active_appointment> appointment = [
-      Active_appointment("Branch A", "Dr. Deniz", "10:00 AM","02.09.2022"),
+      /*Active_appointment("Branch A", "Dr. Deniz", "10:00 AM","02.09.2022"),
       Active_appointment("Branch B", "Dr. Johnson", "2:30 PM","05.06.2023"),
       Active_appointment("Branch s", "Dr. Alex", "5:30 PM","23.11.2023"),
       Active_appointment("Branch A", "Dr. Deniz", "10:00 AM","02.09.2022"),
@@ -24,6 +24,7 @@ class _activeAppointmentsPanelState extends State<activeAppointmentsPanel> {
       Active_appointment("Branch A", "Dr. Deniz", "10:00 AM","02.09.2022"),
       Active_appointment("Branch B", "Dr. Johnson", "2:30 PM","05.06.2023"),
       Active_appointment("Branch s", "Dr. Alex", "5:30 PM","23.11.2023"),
+      */
     ];
     return appointment;
   }
@@ -91,7 +92,7 @@ class _activeAppointmentsPanelState extends State<activeAppointmentsPanel> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${_appointments.doctor}",
+                                    "Doktor Adı",
                                     style: TextStyle(
                                         fontSize: 25, fontWeight: FontWeight.bold),
                                   ),
@@ -99,7 +100,7 @@ class _activeAppointmentsPanelState extends State<activeAppointmentsPanel> {
                                     height: 5,
                                   ),
                                   Text(
-                                    "${_appointments.branch}   ${_appointments.date}   ${_appointments.time}",
+                                    "Branş  Tarih   Saat",
                                     style: TextStyle(
                                         fontSize: 16, color: Colors.white),
                                   ),

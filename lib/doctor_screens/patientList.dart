@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:hastane_sistemi/classes/Patient.dart';
+import 'package:hastane_sistemi/DAO/PatientDAO.dart';
+import 'package:hastane_sistemi/classes/Active_appointment.dart';
 import 'package:hastane_sistemi/doctor_screens/doctorSettings.dart';
 import 'package:hastane_sistemi/doctor_screens/patientDetail.dart';
 
 class patientList extends StatefulWidget {
-  const patientList({Key? key}) : super(key: key);
 
   @override
   State<patientList> createState() => _patientListState();
@@ -12,22 +12,13 @@ class patientList extends StatefulWidget {
 
 class _patientListState extends State<patientList> {
 
-  Future<List<Patient>> patientList() async {
-    final List<Patient> patients = [
-      Patient(name: 'Ahmet', surname: 'Yılmaz', appointmentTime: '10:00', gender: true),
-      Patient(name: 'Ayşe', surname: 'Kara', appointmentTime: '11:30', gender: false),
-      Patient(name: 'Mehmet', surname: 'Öztürk', appointmentTime: '14:45',gender: true),
-      Patient(name: 'Selin', surname: 'Çelik', appointmentTime: '11:30', gender: false),
-      Patient(name: 'Kazım', surname: 'Çolak', appointmentTime: '11:30', gender: true),
-      Patient(name: 'Mehmet', surname: 'Öztürk', appointmentTime: '14:45',gender: true),
-      Patient(name: 'Selin', surname: 'Çelik', appointmentTime: '11:30', gender: false),
-      Patient(name: 'Kazım', surname: 'Çolak', appointmentTime: '11:30', gender: true),
-      Patient(name: 'Mehmet', surname: 'Öztürk', appointmentTime: '14:45',gender: true),
-      Patient(name: 'Selin', surname: 'Çelik', appointmentTime: '11:30', gender: false),
-      Patient(name: 'Kazım', surname: 'Çolak', appointmentTime: '11:30', gender: true),
-    ];
-    return patients;
+  Future<List<Active_appointment>> _patientList() async
+  {
+   var _patients = await PatientDAO().patientList();
+    return _patients;
   }
+
+  late String gender = "";
 
   @override
   Widget build(BuildContext context) {
@@ -59,15 +50,16 @@ class _patientListState extends State<patientList> {
                   Colors.blue
                 ],
                 begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-        child: FutureBuilder<List<Patient>>(
-              future: patientList(),
+        child: FutureBuilder<List<Active_appointment>>(
+              future: _patientList(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  var patients = snapshot.data;
+                  var pat = snapshot.data;
                   return ListView.builder(
-                    itemCount: patients!.length,
+                    itemCount: pat!.length,
                     itemBuilder: (context, index) {
-                      var patient = patients[index];
+                      var patient = pat[index];
+                      gender = patient.Patient.Patient_Gender;
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => patientDetail()));
@@ -83,9 +75,7 @@ class _patientListState extends State<patientList> {
                                 SizedBox(
                                   width: 50,
                                   height: 50,
-                                  child: patient.gender
-                                      ? Image.asset("assets/images/male_patient.png")
-                                      : Image.asset("assets/images/female_patient.png"),
+                                  child: Image.asset("assets/images/$gender.png"),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10.0),
@@ -93,7 +83,7 @@ class _patientListState extends State<patientList> {
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "${patient.name} ${patient.surname} ",
+                                        "${patient.Patient.Patient_Name} ${patient.Patient.Patient_Surname}",
                                         style: TextStyle(
                                             fontSize: 25, fontWeight: FontWeight.bold),
                                       ),
@@ -101,7 +91,7 @@ class _patientListState extends State<patientList> {
                                         height: 5,
                                       ),
                                       Text(
-                                        "${patient.appointmentTime}",
+                                        "${patient.Appointment_Time}",
                                         style: TextStyle(
                                             fontSize: 16, color: Colors.white),
                                       ),

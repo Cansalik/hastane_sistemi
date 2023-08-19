@@ -83,7 +83,7 @@ class _branchManagementPanelState extends State<branchManagementPanel> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("${_branches.branch_name} ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
+                                  Text("${_branches.Branch_Name} ", style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),),
                                   SizedBox(
                                     height: 5,
                                   ),

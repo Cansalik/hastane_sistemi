@@ -15,7 +15,8 @@ class _patientRegisterState extends State<patientRegister> {
   TextEditingController _userNameTextController = TextEditingController();
   TextEditingController _userSurNameTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
-
+  late String gender = "";
+  late int radioValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,35 @@ class _patientRegisterState extends State<patientRegister> {
                 const SizedBox(height: 10,),
                 reusableTextFieldBlack("Şifre", Icons.lock, false, _passwordTextController),
                 const SizedBox(height: 10,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Radio(
+                      value: 1,
+                      groupValue: radioValue,
+                      activeColor: Colors.black,
+                      onChanged: (int? veri) {
+                        setState(() {
+                          radioValue = veri!;
+                        });
+                        gender = "Kadın";
+                      },
+                    ),
+                    Text('Kadın', style: new TextStyle(fontSize: 17.0),),
+                    Radio(
+                      value: 2,
+                      groupValue: radioValue,
+                      activeColor: Colors.black,
+                      onChanged: (int? veri) {
+                        setState(() {
+                          radioValue = veri!;
+                        });
+                        gender = "Erkek";
+                      },
+                    ),
+                    Text('Erkek', style: new TextStyle(fontSize: 17.0,),),
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: SizedBox(

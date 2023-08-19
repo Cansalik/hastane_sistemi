@@ -31,7 +31,7 @@ class _doctorSettingsState extends State<doctorSettings> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(width:150,height:150,child: Image.asset("assets/images/male_patient.png")),
+                SizedBox(width:150,height:150,child: Image.asset("assets/images/Erkek.png")),
                 Text(
                   'Ad: Neşet Can SALIK',
                   style: TextStyle(fontSize: 24, color: Colors.black),

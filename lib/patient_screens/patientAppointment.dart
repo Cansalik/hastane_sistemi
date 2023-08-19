@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hastane_sistemi/DAO/patientAppointmentDAO.dart';
+import 'package:hastane_sistemi/classes/Active_appointment.dart';
+import 'package:hastane_sistemi/classes/Branches.dart';
+import 'package:hastane_sistemi/DAO/PatientDAO.dart';
 
 class patientAppointment extends StatefulWidget {
   const patientAppointment({Key? key}) : super(key: key);
@@ -9,15 +13,6 @@ class patientAppointment extends StatefulWidget {
 
 class _patientAppointmentState extends State<patientAppointment> {
 
-  String selectedDoctorBranch = "Dahiliye"; // Başlangıçta seçilen branş
-  final List<String> doctorBranches = [
-    "Dahiliye",
-    "Cerrahi",
-    "Kardiyoloji",
-    "Nöroloji",
-    "Ortopedi"
-  ]; // Doktor branşları
-
   String _selectedDoctor = "Neşet Can SALIK"; // Başlangıçta seçilen branş
   final List<String> _doctor = [
     "Neşet Can SALIK",
@@ -26,7 +21,7 @@ class _patientAppointmentState extends State<patientAppointment> {
     "Musa Atsal",
     "Hasan Çakmak"
   ];
-
+/*
   String _selectedTime = "08.00"; // Başlangıçta seçilen branş
   final List<String> _time = [
     "08.00",
@@ -36,8 +31,15 @@ class _patientAppointmentState extends State<patientAppointment> {
     "10.00",
     "10.30",
   ];
-
+*/
   TextEditingController _controller = TextEditingController();
+
+  late String selectedDoctorBranch;
+  Future<List<Branches>> branchList() async
+  {
+    var _branches = await patientAppointmentDAO().branchList();
+    return _branches;
+  }
 
 
   @override
@@ -66,30 +68,42 @@ class _patientAppointmentState extends State<patientAppointment> {
                       color: Colors.black.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: selectedDoctorBranch,
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            selectedDoctorBranch = newValue!;
-                          });
-                        },
-                        items: doctorBranches.map<DropdownMenuItem<String>>((String branch) {
-                          return DropdownMenuItem<String>(
-                            value: branch,
-                            child: Row(
-                              children: [
-                                Icon(Icons.local_hospital),
-                                SizedBox(width: 10),
-                                Text(
-                                  branch,
-                                  style: TextStyle(fontSize: 16),
+                    child: FutureBuilder<List<Branches>>(
+                      future: branchList(),
+                      builder: (context,snapshot)
+                      {
+                        if (snapshot.hasData)
+                        {
+                          var branches = snapshot.data;
+                          return DropdownButton<String>(
+                            value: selectedDoctorBranch,
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                selectedDoctorBranch = newValue!;
+                              });
+                            },
+                            items: branches!.map<DropdownMenuItem<String>>((Branches branch) {
+                              return DropdownMenuItem<String>(
+                                value: branch.Branch_Name, // Varsayılan olarak bu alanı kullanabilirsiniz, gerektiğinde ayarlayabilirsiniz
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.local_hospital),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      branch.Branch_Name,
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            }).toList(),
                           );
-                        }).toList(),
-                      ),
+                        }
+                        else
+                        {
+                          return Center();
+                        }
+                      },
                     ),
                   ),
                 ),
@@ -131,7 +145,7 @@ class _patientAppointmentState extends State<patientAppointment> {
                   ),
                 ),
                 const SizedBox(height: 30,),
-                SizedBox(
+                /*SizedBox(
                   width: 350,
                   height: 75,
                   child: Container(
@@ -166,7 +180,7 @@ class _patientAppointmentState extends State<patientAppointment> {
                       ),
                     ),
                   ),
-                ),
+                ),*/
                 const SizedBox(height: 30,),
                 TextFormField(
                   controller: _controller,

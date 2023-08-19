@@ -44,7 +44,7 @@ class _patientDetailState extends State<patientDetail> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(width:150,height:150,child: Image.asset("assets/images/male_patient.png")),
+                SizedBox(width:150,height:150,child: Image.asset("assets/images/Erkek.png")),
                 Text(
                   'Hasta Adı: John Doe',
                   style: TextStyle(fontSize: 24, color: Colors.white),

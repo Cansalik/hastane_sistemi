@@ -1,7 +1,7 @@
 class Branches
 {
-  late int branch_id;
-  late String branch_name;
+  late int Branch_ID;
+  late String Branch_Name;
 
-  Branches(this.branch_id, this.branch_name);
+  Branches(this.Branch_ID, this.Branch_Name);
 }
